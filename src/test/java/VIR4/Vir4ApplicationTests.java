@@ -7,7 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class Vir4ApplicationTests {
 
 	@Test
-	void contextLoads()   {
+	void contextLoads() {
 	}
 
 }
