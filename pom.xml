@@ -9,13 +9,16 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
+	<groupId>FM9IM6</groupId>
 	<artifactId>VIR4</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>VIR4</name>
 	<description>FM9IM6</description>
+	<description>Demo project for Spring Boot</description>
 
 	<properties>
 		<java.version>15</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 
 	<dependencies>
@@ -71,6 +74,7 @@
                 </configuration>
             </plugin>
         </plugins>
+		</plugins>
 	</build>
 
 </project>
