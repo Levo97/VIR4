@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="hu"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="default">
+
+
+
+        <title>Dashboard</title>
+    </head>
+    <body>
+
+
+
+        <div layout:fragment="content">
+            <h1 th:inline="text"> <a  th:text="${fullName}"></a></h1>
+            <p>Itt menedzselheted a felhasználók jogkörét:</p><br>
+
+
+            <select class="form-control"   id="dropOperator">
+                <option value="0" selected disabled hidden > Kérlek válassz felhasználót... </option>
+                <option th:each="user : ${users}" th:value="${user.email}" th:text="${user.fullname}"></option>
+            </select>
+
+
+            <table class="table" id="roles" style="  text-align: center;">
+                <thead>
+                <tr>
+
+                    <th scope="col">JPG</th>
+                    <th scope="col">PNG</th>
+                    <th scope="col">GIF</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+
+                    <td>  <input class="form-check-input" type="checkbox" value="" id="jpg"></td>
+                    <td>  <input class="form-check-input" type="checkbox" value="" id="png"></td>
+                    <td>  <input class="form-check-input" type="checkbox" value="" id="gif"></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <button type="button" id="save" class="btn btn-secondary btn-lg btn-block">Mentés</button>
+
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+            <script>
+                $("#dropOperator").on('change', () => {
+
+               document.getElementById("jpg").checked = false;
+               document.getElementById("png").checked = false;
+               document.getElementById("gif").checked = false;
+
+
+                    $.post(
+                    "/rights",
+                     {email: $("#dropOperator").val()}
+                     ).done((data) => {
+                      //console.log(data)
+                        if (data){
+                            var obj = JSON.parse(data);
+                            console.log(obj);
+                            obj.forEach( role => {
+                                if(role.name == "JPG"){
+                                    $("#jpg").prop("checked", "true")
+                                }
+                                if(role.name == "PNG"){
+                                    $("#png").prop("checked", "true")
+                                }
+                                if(role.name == "GIF"){
+                                    $("#gif").prop("checked", "true")
+                                }
+                            })
+                        }
+                    })
+                });
+
+                $("#save").on('click', () => {
+                if(document.getElementById("dropOperator").value != 0){
+
+                    $.post("/modifyRights",{
+                        email: $("#dropOperator").val(),
+                        JPG:  $("#jpg").prop("checked"),
+                        PNG:  $("#png").prop("checked"),
+                        GIF:  $("#gif").prop("checked")
+                    }).done((data) => {
+                       // console.log(data)
+                    })
+                }});
+
+            </script>
+        </div>
+    </body>
+</html>
