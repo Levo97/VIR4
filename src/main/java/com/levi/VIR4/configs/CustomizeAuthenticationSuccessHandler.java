@@ -20,7 +20,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request,
-            HttpServletResponse response, Authentication authentication)
+                                        HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
         //OK status
         response.setStatus(HttpServletResponse.SC_OK);
@@ -32,7 +32,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
                 response.sendRedirect("/gallery");
 
 
-        }}
+            }}
     }
 
 }

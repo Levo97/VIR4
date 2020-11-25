@@ -5,93 +5,61 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="default">
+
 <head>
     <title>Gallery</title>
     <style>
         body {
             display: block;
         }
+        img {
+  border: 5px solid #555;
+}
     </style>
 </head>
 
 <body>
 <div layout:fragment="content">
-    <div class="row">
 
-        <!-- Grid column -->
-        <div class="col-md-12 d-flex justify-content-center mb-5">
+    <div class="col-md-12 d-flex justify-content-center mb-5">
 
-            <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="all">All</button>
-            <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="1">JPG</button>
-            <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="2">PNG</button>
-            <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="3">GIF</button>
-
-        </div>
-        <!-- Grid column -->
+        <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="all">All</button>
+        <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="1">JPG</button>
+        <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="2">PNG</button>
+        <button type="button" class="btn btn-outline-black waves-effect filter" data-rel="3">GIF</button>
 
     </div>
-    <!-- Grid row -->
 
-    <!-- Grid row -->
-    <div class="gallery" id="gallery">
+   <div  class="gallery" id="gallery"></div>
 
-        <!-- Grid column -->
-        <div class="mb-3 pics animation all 1">
-            <img class="img-fluid" src="/images/jpg/1.jpg">
-        </div>
-        <div class="mb-3 pics animation all 1">
-            <img class="img-fluid" src="/images/jpg/2.jpg">
-        </div>
-        <div class="mb-3 pics animation all 1">
-            <img class="img-fluid" src="/images/jpg/3.jpg">
-        </div>
-        <div class="mb-3 pics animation all 1">
-            <img class="img-fluid" src="/images/jpg/4.jpg">
-        </div>
-        <div class="mb-3 pics animation all 1">
-            <img class="img-fluid" src="/images/jpg/5.jpg">
-        </div>
-        <!-- Grid column -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
-        <!-- Grid column -->
-        <div class="mb-3 pics animation all 2">
-            <img class="img-fluid" src="/images/png/1.png" alt="Card image cap">
-        </div>
-        <div class="mb-3 pics animation all 2">
-            <img class="img-fluid" src="/images/png/2.png" alt="Card image cap">
-        </div>
-        <div class="mb-3 pics animation all 2">
-            <img class="img-fluid" src="/images/png/3.png" alt="Card image cap">
-        </div>
-        <div class="mb-3 pics animation all 2">
-            <img class="img-fluid" src="/images/png/4.png" alt="Card image cap">
-        </div>
-        <div class="mb-3 pics animation all 2">
-            <img class="img-fluid" src="/images/png/5.png" alt="Card image cap">
-        </div>
+    <script th:inline="javascript">
 
-        <!-- Grid column -->
-        <div class="mb-3 pics animation all 3">
-            <img class="img-fluid" src="/images/gif/1.gif" alt="Card image cap">
-        </div>
-        <div class="mb-3 pics animation all 3">
-            <img class="img-fluid" src="/images/gif/2.gif" alt="Card image cap">
-        </div>
-        <div class="mb-3 pics animation all 3">
-            <img class="img-fluid" src="/images/gif/3.gif" alt="Card image cap">
-        </div>
-        <div class="mb-3 pics animation all 3">
-            <img class="img-fluid" src="/images/gif/4.gif" alt="Card image cap">
-        </div>
-        <div class="mb-3 pics animation all 3">
-            <img class="img-fluid" src="/images/gif/5.gif" alt="Card image cap">
-        </div>
-    </div>
-    <!-- Grid row -->
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+var jpg = (jpg === undefined ) ? (/*[[${JPG}]]*/ []) : jpg;
+var png = (png === undefined) ? (/*[[${PNG}]]*/ []) : png;
+var gif = (gif === undefined) ? (/*[[${GIF}]]*/ []) : gif;
+</script>
 
 <script>
+
+if (jpg!= undefined ){
+for (pic in jpg) {
+document.getElementById("gallery").innerHTML += "<div class='mb-3 pics animation all 1'><img class='img-fluid' src='/images/"+jpg[pic]+"' > </div>";
+}}
+
+if (png!= undefined ){
+for (pic in png) {
+document.getElementById("gallery").innerHTML += "<div class='mb-3 pics animation all 2'><img class='img-fluid' src='/images/"+png[pic]+"' > </div>";
+}}
+
+if (gif!= undefined ){
+for (pic in gif) {
+document.getElementById("gallery").innerHTML += "<div class='mb-3 pics animation all 3'><img class='img-fluid' src='/images/"+gif[pic]+"' > </div>";
+}}
+
+</script>
+    <script>
 var selectedClass = "";
 $(".filter").click(function(){
 selectedClass = $(this).attr("data-rel");

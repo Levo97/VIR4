@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -116,6 +117,7 @@ public class AuthController {
 
     @RequestMapping(value = "/dashboard", method = RequestMethod.GET)
     public ModelAndView dashboard() {
+
         ModelAndView modelAndView = new ModelAndView();
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByEmail(auth.getName());
@@ -137,7 +139,49 @@ public class AuthController {
         modelAndView.addObject("currentUser", user);
         modelAndView.addObject("fullName", "Üdv," + user.getFullname()+"!");
         modelAndView.setViewName("gallery");
+
+        ArrayList<String> png = new ArrayList<String>();
+        ArrayList<String> jpg = new ArrayList<String>();
+        ArrayList<String> gif = new ArrayList<String>();
+
+
+        File directory = new File(System.getProperty("user.dir") +"\\src\\main\\resources\\static\\images" );
+        File[] f = directory.listFiles();
+        for (File file : f) {
+            if (file != null ) {
+                if(file.getName().toLowerCase().endsWith(".png")){
+                    png.add(file.getName());
+                }if(file.getName().toLowerCase().endsWith(".jpg")){
+                    jpg.add(file.getName());
+                }if(file.getName().toLowerCase().endsWith(".gif")){
+                    gif.add(file.getName());
+                }
+            }
+
+        }
+
+        Set<Role> dsa = user.getRoles();
+
+        List<Role> targetList = new ArrayList<>(dsa);
+
+        for (Role a : targetList) {
+            String role = a.getRole();
+            if (role.equals("JPG")){
+                modelAndView.addObject("JPG", jpg);
+
+            }if (role.equals("PNG")){
+                modelAndView.addObject("PNG", png);
+
+            }if (role.equals("GIF")){
+                modelAndView.addObject("GIF", gif);
+
+            }
+        }
+
+
         return modelAndView;
+
+
     }
 
 
