@@ -27,7 +27,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder; //BCrypt
 
     @Autowired
     CustomizeAuthenticationSuccessHandler customizeAuthenticationSuccessHandler;

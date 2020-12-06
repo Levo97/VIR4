@@ -22,7 +22,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
     public void onAuthenticationSuccess(HttpServletRequest request,
                                         HttpServletResponse response, Authentication authentication)
             throws IOException, ServletException {
-        //OK status
+        //OK
         response.setStatus(HttpServletResponse.SC_OK);
 
         for (GrantedAuthority auth : authentication.getAuthorities()) {

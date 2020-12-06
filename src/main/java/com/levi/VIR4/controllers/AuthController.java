@@ -33,10 +33,10 @@ import java.util.Set;
 
 
 
-@Controller
+@Controller  // a Controller azonosítása
 public class AuthController {
 
-    @Autowired
+    @Autowired // Automatikus komponens szkennelés
     private CustomUserDetailsService userService;
 
     public ModelAndView login() {
