@@ -26,6 +26,10 @@ import org.springframework.stereotype.Service;
 
 
 @Service
+/*
+Service modul.
+Bonyolultabb logikát,számításokat  tartalmazó  osztály. @Service annotációval jelöljük.
+ */
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired

@@ -7,6 +7,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface RoleRepository extends MongoRepository<Role, String> {
 
-    Role findByRole(String role);
+    Role findByRole(String role); // egyszerű MongoDb lekérdezés
     
 }
